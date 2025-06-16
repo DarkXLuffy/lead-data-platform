@@ -25,12 +25,12 @@ if not os.path.exists(UPLOAD_FOLDER):
 UPLOADED_CSV_PATH = os.path.join(UPLOAD_FOLDER, 'lead_data.csv')
 
 # Load credentials from environment variables
-ELEVENLABS_API_KEY = os.getenv("sk_de1ade198998dc97d0b5c96d95fc2d158010c38607a8479d")
-TWILIO_ACCOUNT_SID = os.getenv("ACed85b2a2d2293fc43f14651be7ad2f58")
-TWILIO_AUTH_TOKEN = os.getenv("61f2de50b64cf4c0c03587bdc1d2080f")
-TWILIO_PHONE_NUMBER = os.getenv("+19152847071")
-AGENT_PHONE_NUMBER_ID = os.getenv("phnum_01jxh9xvwwep5arskcwfm6aa02")
-AGENT_ID = os.getenv("agent_01jxffk5wve1c99nb58dfatxv3")
+ELEVENLABS_API_KEY = os.getenv("ELEVENLABS_API_KEY")
+TWILIO_ACCOUNT_SID = os.getenv("TWILIO_ACCOUNT_SID")
+TWILIO_AUTH_TOKEN = os.getenv("TWILIO_AUTH_TOKEN")
+TWILIO_PHONE_NUMBER = os.getenv("TWILIO_PHONE_NUMBER")
+AGENT_PHONE_NUMBER_ID = os.getenv("AGENT_PHONE_NUMBER_ID")
+AGENT_ID = os.getenv("AGENT_ID")
 
 # Validate credentials
 if not all([ELEVENLABS_API_KEY, TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_PHONE_NUMBER, AGENT_PHONE_NUMBER_ID, AGENT_ID]):
