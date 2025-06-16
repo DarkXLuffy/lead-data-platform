@@ -16,7 +16,7 @@ function uploadFile() {
     const formData = new FormData();
     formData.append('file', file);
 
-    fetch('https://<your-backend-url>/upload', {
+    fetch('https://lead-data-platform.onrender.com/upload', {
         method: 'POST',
         body: formData
     })
@@ -34,7 +34,7 @@ function uploadFile() {
 }
 
 function runScript() {
-    fetch('https://<your-backend-url>/run-script', {
+    fetch('https://lead-data-platform.onrender.com/run-script', {
         method: 'POST'
     })
     .then(response => response.json())
