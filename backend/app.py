@@ -240,8 +240,11 @@ def upload_file():
 
 @app.route('/run-script', methods=['POST'])
 def run_script():
-    result = process_lead_data()
-    return jsonify({"status": "success", "message": result}), 200
+    try:
+        result = process_lead_data()
+        return jsonify({"status": "success", "message": result}), 200
+    except Exception as e:
+        return jsonify({"status": "error", "message": f"Error processing script: {str(e)}"}), 500
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.getenv("PORT", 5000)))
