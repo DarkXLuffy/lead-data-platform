@@ -13,7 +13,7 @@ from flask_cors import CORS
 
 # Initialize Flask app
 app = Flask(__name__)
-CORS(app)  # Allow cross-origin requests
+CORS(app, resources={r"/*": {"origins": "https://darkxluffy.github.io"}})  # Allow requests from your frontend
 UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -49,6 +49,9 @@ def signal_handler(sig, frame):
     print("ℹ️ Shutting down gracefully...")
     running = False
     sys.exit(0)
+
+# Set up signal handler at the top level (main thread)
+signal.signal(signal.SIGINT, signal_handler)
 
 def fetch_agent_config():
     """Fetch the agent's configuration to debug dynamic variables"""
@@ -165,9 +168,6 @@ def initiate_outbound_call(phone_number, customer_name):
 def process_lead_data():
     """Read customer data from the uploaded CSV file and initiate outbound calls"""
     print("🚀 Starting batch outbound calls...")
-
-    # Set up signal handler for graceful shutdown
-    signal.signal(signal.SIGINT, signal_handler)
 
     # Fetch agent configuration for debugging
     fetch_agent_config()
