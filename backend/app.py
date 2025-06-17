@@ -144,6 +144,7 @@ def initiate_outbound_call(phone_number, customer_name):
         print(f"📋 Generated TwiML URL: {twiml_url}")
 
         # Step 3: Use Twilio to dial the number with dynamic TwiML
+        print(f"📞 Initiating Twilio call with Account SID: {TWILIO_ACCOUNT_SID}, From: {TWILIO_PHONE_NUMBER}, To: {phone_number}")
         call = twilio_client.calls.create(
             to=phone_number,
             from_=TWILIO_PHONE_NUMBER,
@@ -160,6 +161,7 @@ def initiate_outbound_call(phone_number, customer_name):
     except requests.exceptions.HTTPError as e:
         print(f"❌ HTTP Error initiating call for {customer_name} ({phone_number}): {e}")
         print(f"Response Text: {e.response.text if e.response else 'N/A'}")
+        print(f"Response Status Code: {e.response.status_code if e.response else 'N/A'}")
         return None, None, "failed"
     except Exception as e:
         print(f"❌ Error initiating call for {customer_name} ({phone_number}): {e}")
@@ -218,6 +220,13 @@ def process_lead_data():
 
         # Add a delay to avoid rate limits
         time.sleep(2)
+
+    # Delete the CSV file after processing
+    try:
+        os.remove(UPLOADED_CSV_PATH)
+        print(f"🗑️ Deleted uploaded CSV file: {UPLOADED_CSV_PATH}")
+    except Exception as e:
+        print(f"⚠️ Error deleting CSV file: {e}")
 
     print("🏁 Batch calling completed")
     return "Batch calling completed successfully."
